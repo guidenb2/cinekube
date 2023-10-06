@@ -24,7 +24,7 @@ Run the jar file
 
 ## Options
 
-Configuration file to be added soon
+Configuration file in resources/
 
 ## Examples
 
