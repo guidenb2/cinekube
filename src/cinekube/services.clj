@@ -13,3 +13,9 @@
        {:url url
         :method method
         :headers headers}))))
+
+(defn get-url
+  [config
+   service]
+  (let [service-config (-> config service)]
+    (str (:scheme service-config) "://" (:address service-config) ":" (:port service-config))))

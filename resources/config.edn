@@ -1,1 +1,4 @@
-{:port 8000}
+{:port 8000
+ :movie-tracker {:port 8444
+                 :address "127.0.0.1"
+                 :scheme "http"}}

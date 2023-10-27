@@ -1,11 +1,9 @@
 (ns cinekube.service-movie-tracker
   (:require [cinekube.services :as services]))
 
-(def service-root "http://127.0.0.1:8444")
-
-(defn currently-reading []
+(defn currently-watching [config]
   (let []
     (services/request
-      (str service-root "/watched")
+      (str (services/get-url config :movie-tracker) "/watching")
       :get
       {:content-type "application/json"})))

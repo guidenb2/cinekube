@@ -8,13 +8,13 @@
 
 
 (defn handler [_]
-  {:status 200, :body (:body (movie-tracker/currently-reading))})
+  {:status 200, :body (:body (movie-tracker/currently-watching))})
 
 
 (def app
   (ring/ring-handler
     (ring/router
-      [["/tracker/watched" {:get handler}]])))
+      [["/tracker/watching" {:get handler}]])))
 
 
 (defn init-server []
