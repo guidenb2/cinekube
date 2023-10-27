@@ -7,15 +7,17 @@
             [reitit.ring :as ring]))
 
 
-(defn handler [_]
+(defn handler [{:keys [config]}]
   {:status 200, :body (:body (movie-tracker/currently-watching))})
 
+(defn config-middleware [handler config]
+  (fn [request]
+    (handler (assoc request :config config))))
 
 (def app
   (ring/ring-handler
     (ring/router
       [["/tracker/watching" {:get handler}]])))
-
 
 (defn init-server []
   (let [config (config/read-config)]
