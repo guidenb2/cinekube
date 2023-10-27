@@ -8,16 +8,18 @@
 
 
 (defn handler [{:keys [config]}]
-  {:status 200, :body (:body (movie-tracker/currently-watching))})
+  {:status 200, :body (:body (movie-tracker/currently-watching config))})
 
 (defn config-middleware [handler config]
   (fn [request]
     (handler (assoc request :config config))))
 
 (def app
-  (ring/ring-handler
-    (ring/router
-      [["/tracker/watching" {:get handler}]])))
+  (let [config (config/read-config)]
+    (ring/ring-handler
+      (ring/router
+        [["/tracker/watching" {:get {:middleware [[config-middleware config]]
+                                     :handler handler}}]]))))
 
 (defn init-server []
   (let [config (config/read-config)]
